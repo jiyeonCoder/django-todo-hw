@@ -6,13 +6,10 @@
     <title>Document</title>
   </head>
   <body>
-    <h1>Todo의 Index 입니다</h1>
-    <ul>
-      {% for todo in todos %}
-      <a href="/todo/{{ todo.id }}">
-        <li>{{ todo.content }}</li>
-      </a>
-      {% endfor %}
-    </ul>
+    <div>
+      <h1>{{ todo.content }}</h1>
+      <p>{{ todo.created_at }}</p>
+      <p>{{ todo.updated_at }}</p>
+    </div>
   </body>
 </html>
