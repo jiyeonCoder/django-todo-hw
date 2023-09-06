@@ -17,7 +17,7 @@ def index(request):
 def create(request):
     if request.method == 'POST':
         Todo.objects.create(content=request.POST['content'])
-        return HttpResponse('create!')
+        return redirect('/todo/')
     elif request.method == 'GET':
         return render(request, 'todo/create.html')
     else:
@@ -37,5 +37,21 @@ def delete(request, todo_id):
         todo = Todo.objects.get(id=todo_id)
         todo.delete()
         return redirect('/todo/')
+    else:
+        return HttpResponse('Invalid request method', status=405)
+
+
+def update(request, todo_id):
+    if request.method == 'GET':
+        todo = Todo.objects.get(id=todo_id)
+        context = {
+            'todo': todo,
+        }
+        return render(request, 'todo/update.html', context)
+    elif request.method == 'POST':
+        todo = Todo.objects.get(id=todo_id)
+        todo.content = request.POST['content']
+        todo.save()
+        return redirect(f'/todo/{todo_id}/')
     else:
         return HttpResponse('Invalid request method', status=405)

@@ -11,12 +11,15 @@
       <p>{{ todo.created_at }}</p>
       <p>{{ todo.updated_at }}</p>
     </div>
+    <a href="/todo/update/{{ todo.id }}/">
+      <button>Edit</button>
+    </a>
+    <a href="/todo">
+      <button>Back to Todo List</button>
+    </a>
     <form action="/todo/delete/{{ todo.id }}/" method="post">
       {% csrf_token %}
       <button>Delete</button>
     </form>
-    <a href="/todo">
-      <button>Back to Todo List</button>
-    </a>
   </body>
 </html>
