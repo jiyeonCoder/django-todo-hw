@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import redirect, render
 from django.http import HttpResponse
 from todo.models import Todo
 
@@ -30,3 +30,12 @@ def read(request, todo_id):
         'todo': todo,
     }
     return render(request, 'todo/detail.html', context)
+
+
+def delete(request, todo_id):
+    if request.method == 'POST':
+        todo = Todo.objects.get(id=todo_id)
+        todo.delete()
+        return redirect('/todo/')
+    else:
+        return HttpResponse('Invalid request method', status=405)
