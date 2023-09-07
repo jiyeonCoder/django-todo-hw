@@ -37,8 +37,8 @@ def read(request, todo_id):
 
 def delete(request, todo_id):
     if request.method == 'POST':
+        todo = Todo.objects.get(id=todo_id)
         if request.user == todo.user:
-            todo = Todo.objects.get(id=todo_id)
             todo.delete()
             return redirect('/todo/')
         else:
@@ -55,8 +55,8 @@ def update(request, todo_id):
         }
         return render(request, 'todo/update.html', context)
     elif request.method == 'POST':
+        todo = Todo.objects.get(id=todo_id)
         if request.user == todo.user:
-            todo = Todo.objects.get(id=todo_id)
             todo.content = request.POST['content']
             todo.save()
             return redirect(f'/todo/{todo_id}/')
