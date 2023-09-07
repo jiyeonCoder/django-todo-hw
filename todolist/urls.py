@@ -6,5 +6,6 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('index/', views.index),
     path('getdata/', views.getdata),
-    path('todo/', include('todo.urls'))
+    path('todo/', include('todo.urls')),
+    path('user/', include('user.urls')),
 ]

@@ -7,6 +7,18 @@
   </head>
   <body>
     <h1>Todo의 Index 입니다</h1>
+    {% if request.user.is_authenticated %}
+    <div>{{ request.user.username }}</div>
+    <form action="/user/logout/" method="post">
+      {% csrf_token %}
+      <button>Logout</button>
+    </form>
+    {% else %}
+    <div>
+      <a href="/user/login">Login</a>
+      <a href="/user/signup">Signup</a>
+    </div>
+    {% endif %}
     <a href="/todo/create">
       <button>Write New Todo List</button>
     </a>

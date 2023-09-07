@@ -1,3 +1,24 @@
-from django.shortcuts import render
+from django.shortcuts import redirect, render
+from django.http import HttpResponse
+from django.contrib.auth import authenticate, login as auth_login, logout as auth_logout
+from user.models import User
 
-# Create your views here.
+
+def signup(request):
+    if request.method == 'POST':
+        username = request.POST['username']
+        password = request.POST['password']
+        User.objects.create_user(username=username, password=password)
+        return redirect('/todo/')
+    elif request.method == 'GET':
+        return render(request, 'user/signup.html')
+    else:
+        return HttpResponse('Invalid request method', status=405)
+
+
+def logout(request):
+    if request.method == 'POST':
+        auth_logout(request)
+        return redirect('/todo/')
+    else:
+        return HttpResponse('Invalid request method', status=405)
