@@ -16,6 +16,20 @@ def signup(request):
         return HttpResponse('Invalid request method', status=405)
 
 
+def login(request):
+    if request.method == 'POST':
+        username = request.POST['username']
+        password = request.POST['password']
+        user = authenticate(request, username=username, password=password)
+        if user is not None:
+            auth_login(request, user)
+            return redirect('/todo/')
+    elif request.method == 'GET':
+        return render(request, 'user/login.html')
+    else:
+        return HttpResponse('Invalid request method', status=401)
+
+
 def logout(request):
     if request.method == 'POST':
         auth_logout(request)
