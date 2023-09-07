@@ -8,4 +8,5 @@ urlpatterns = [
     path('<int:todo_id>/', views.read),
     path('delete/<int:todo_id>/', views.delete),
     path('update/<int:todo_id>/', views.update),
+    path('isdone/', views.isdone)
 ]

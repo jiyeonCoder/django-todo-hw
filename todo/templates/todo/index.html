@@ -25,7 +25,15 @@
     <ul>
       {% for todo in todos %}
       <a href="/todo/{{ todo.id }}">
-        <li>{{ todo.content }}</li>
+        <li>
+          <div>
+            {{ todo.content }}
+            <form action="/todo/isdone/" method="post">
+              {% csrf_token %}
+              <input type="checkbox" name="is_done" />
+            </form>
+          </div>
+        </li>
       </a>
       {% endfor %}
     </ul>

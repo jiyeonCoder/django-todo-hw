@@ -12,15 +12,20 @@
       <p>{{ todo.updated_at }}</p>
       <p>{{ todo.user.username }}</p>
     </div>
-    <a href="/todo/update/{{ todo.id }}/">
-      <button>Edit</button>
-    </a>
     <a href="/todo">
       <button>Back to Todo List</button>
     </a>
-    <form action="/todo/delete/{{ todo.id }}/" method="post">
-      {% csrf_token %}
-      <button>Delete</button>
-    </form>
+
+    {% if request.user == todo.user %}
+    <div>
+      <a href="/todo/update/{{ todo.id }}/">
+        <button>Edit</button>
+      </a>
+      <form action="/todo/delete/{{ todo.id }}/" method="post">
+        {% csrf_token %}
+        <button>Delete</button>
+      </form>
+    </div>
+    {% endif %}
   </body>
 </html>
