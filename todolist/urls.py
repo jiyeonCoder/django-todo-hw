@@ -6,8 +6,7 @@ from . import views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('index/', views.index),
-    path('getdata/', views.getdata),
+    # path('getdata/', views.getdata),
     path('todo/', include('todo.urls')),
     path('user/', include('user.urls')),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
