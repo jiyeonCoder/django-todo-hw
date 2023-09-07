@@ -10,6 +10,7 @@
       <h1>{{ todo.content }}</h1>
       <p>{{ todo.created_at }}</p>
       <p>{{ todo.updated_at }}</p>
+      <p>{{ todo.user.username }}</p>
     </div>
     <a href="/todo/update/{{ todo.id }}/">
       <button>Edit</button>
